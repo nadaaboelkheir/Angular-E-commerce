@@ -1,0 +1,136 @@
+<div
+  class="container mt-5 border-1 border border-success-subtle rounded-3 w-50 p-5"
+>
+  <form
+    class="d-flex flex-column justify-content-center"
+    [formGroup]="registerForm"
+    (ngSubmit)="Submit()"
+  >
+    <div class="mt-3">
+      <label>Email address</label>
+      <input type="email" formControlName="email" class="form-control" />
+
+      @if(submitted ||registerForm.get('email')?.invalid&&
+      registerForm.get('email')?.touched){
+      @if(registerForm.get('email')?.hasError('required')){
+      <div class="text-danger">Email is required</div>
+
+      } @if(registerForm.get('email')?.hasError('email')){
+      <div class="text-danger">Email is invalid</div>
+      } }
+    </div>
+
+    <div class="mt-3">
+      <label>Name</label>
+      <input type="text" formControlName="name" class="form-control" />
+      @if(submitted ||registerForm.get('name')?.invalid&&
+      registerForm.get('name')?.touched){
+      @if(registerForm.get('name')?.hasError('required')){
+      <div class="text-danger">Name is required</div>
+      } @if(registerForm.get('name')?.hasError('pattern')){
+      <div class="text-danger">Name is invalid</div>
+
+      } }
+    </div>
+
+    <div class="mt-3">
+      <label>Username</label>
+      <input type="text" formControlName="username" class="form-control" />
+
+      @if(submitted ||registerForm.get('username')?.invalid&&
+      registerForm.get('username')?.touched){
+      @if(registerForm.get('username')?.hasError('required')){
+      <div class="text-danger">Username is required</div>
+      } @if(registerForm.get('username')?.hasError('pattern')){
+      <div class="text-danger">Username must not contain spaces</div>
+      }}
+    </div>
+
+    <div class="mt-3">
+      <label>Password</label>
+      <input type="password" formControlName="password" class="form-control" />
+      @if(submitted ||registerForm.get('password')?.invalid&&
+      registerForm.get('password')?.touched){
+      @if(registerForm.get('password')?.hasError('required')){
+      <div class="text-danger">Password is required</div>
+      } @if(registerForm.get('password')?.hasError('minlength')){
+      <div class="text-danger">Password must be at least 8 characters long</div>
+      } @if(registerForm.get('password')?.hasError('pattern')){
+      <div class="text-danger">
+        Password must contain at least one lowercase, one uppercase, one digit,
+        and one special character
+      </div>
+      }}
+    </div>
+
+    <div class="mt-3">
+      <label>Confirm Password</label>
+      <input
+        type="password"
+        formControlName="confirmPassword"
+        class="form-control"
+      />
+
+      @if(submitted ||registerForm.get('confirmPassword')?.invalid&&
+      registerForm.get('confirmPassword')?.touched){
+      @if(registerForm.get('confirmPassword')?.hasError('required')){
+      <div class="text-danger">Confirm Password is required</div>
+      } @if (registerForm.get('confirmPassword')?.hasError('passwordMismatch'))
+      {
+      <div class="text-danger">Passwords do not match</div>
+
+      } }
+    </div>
+    <!-- Dynamic Address Fields -->
+    <div formArrayName="adresses">
+      <div
+        *ngFor="
+          let address of adresses.controls;
+          let i = index;
+          trackBy: trackByFn
+        "
+        [formGroupName]="i"
+        class="mt-3 d-flex align-items-center justify-content-center"
+      >
+        <div>
+          <label>City</label>
+          <input type="text" formControlName="city" class="form-control" />
+        </div>
+        <div>
+          <label>Street</label>
+          <input type="text" formControlName="street" class="form-control" />
+        </div>
+        <button
+          type="button"
+          class="btn btn-danger w-25"
+          (click)="deleteAdress(i)"
+        >
+          Delete
+        </button>
+      </div>
+
+      @if(adresses.controls.length == 0){
+      <div class="mt-3">
+        <p>No addresses found</p>
+      </div>
+      }
+    </div>
+
+    <!-- Add Address Button -->
+    <button
+      type="button"
+      class="btn btn-success mx-auto mt-3 w-100"
+      (click)="addAdress()"
+    >
+      Add Address
+    </button>
+
+    <button type="submit" class="btn btn-success mx-auto mt-3 w-100">
+      Register
+    </button>
+    <p class="mx-auto mt-2">
+      Already have an account?
+      <a class="text-decoration-none text-success" routerLink="/login">Login</a>
+    </p>
+  </form>
+</div>

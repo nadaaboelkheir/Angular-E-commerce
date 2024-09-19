@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary p-2">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold text-success" routerLink="/">Products App</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <div class="d-flex">
+        <a
+          class="nav-link active fw-bold me-4"
+          aria-current="page"
+          routerLink="/login"
+          routerLinkActive="ative_link"
+          >login</a
+        >
+        <a
+          class="nav-link active fw-bold me-4"
+          aria-current="page"
+          routerLink="/register"
+          routerLinkActive="ative_link"
+          >register</a
+        >
+        <a
+          routerLinkActive="ative_link"
+          routerLink="/cart"
+          type="button"
+          class="border-0 position-relative me-4 bg-white"
+        >
+          <i class="bi bi-cart"></i>
+          <span
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary-subtle text-success"
+          >
+            1
+            <span class="visually-hidden">unread messages</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>

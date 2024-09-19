@@ -1,0 +1,45 @@
+<div
+  class="card h-100 border-1 rounded-5"
+  (click)="showProductDetails(productItem.id)"
+>
+  <div class="position-relative">
+    <img
+      [src]="productItem.images"
+      class="card-img-top rounded-top-5"
+      alt="Product Image"
+    />
+    <span
+      class="badge position-absolute top-0 start-0 m-3"
+      [ngClass]="{
+        'text-bg-success': productItem.stock > 0,
+        'text-bg-danger': productItem.stock <= 0
+      }"
+    >
+      {{ productItem.stock > 0 ? "In Stock" : "Out of Stock" }}
+    </span>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ productItem.title }}</h5>
+    <p class="card-text">
+      {{ productItem.description }}
+    </p>
+    <p class="card-text fw-bold">{{ productItem.price }} $</p>
+    <div class="d-flex align-items-center my-3">
+      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+        <i
+          class="bi"
+          [ngClass]="{
+            'bi-star-fill text-success': productItem.rating >= i + 1,
+            'bi-star-half text-success':
+              productItem.rating > i && productItem.rating < i + 1,
+            'bi-star text-success': productItem.rating < i + 1
+          }"
+        >
+        </i>
+      </ng-container>
+      <span class="ms-2">({{ productItem.rating }})</span>
+    </div>
+
+    <button class="btn btn-success rounded-5 w-50 p-2">Add to cart</button>
+  </div>
+</div>
