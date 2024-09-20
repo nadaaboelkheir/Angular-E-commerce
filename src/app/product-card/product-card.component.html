@@ -1,7 +1,4 @@
-<div
-  class="card h-100 border-1 rounded-5"
-  (click)="showProductDetails(productItem.id)"
->
+<div class="card h-100 rounded-5 border-0 shadow-lg custom-card">
   <div class="position-relative">
     <img
       [src]="productItem.images"
@@ -9,7 +6,7 @@
       alt="Product Image"
     />
     <span
-      class="badge position-absolute top-0 start-0 m-3"
+      class="badge position-absolute w-25 p-2 fs-6 top-0 start-0 m-3"
       [ngClass]="{
         'text-bg-success': productItem.stock > 0,
         'text-bg-danger': productItem.stock <= 0
@@ -19,17 +16,17 @@
     </span>
   </div>
   <div class="card-body">
-    <h5 class="card-title">{{ productItem.title }}</h5>
-    <p class="card-text">
-      {{ productItem.description }}
-    </p>
-    <p class="card-text fw-bold">{{ productItem.price }} $</p>
-    <div class="d-flex align-items-center my-3">
+    <h5 class="card-title fw-bold text-success mx-3">
+      {{ productItem.title }}
+    </h5>
+
+    <p class="card-text fw-bold fs-3 mx-3">{{ productItem.price }} $</p>
+    <div class="d-flex align-items-center mx-3 my-3">
       <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
         <i
           class="bi"
           [ngClass]="{
-            'bi-star-fill text-success': productItem.rating >= i + 1,
+            'bi-star-fill fs-4 text-success': productItem.rating >= i + 1,
             'bi-star-half text-success':
               productItem.rating > i && productItem.rating < i + 1,
             'bi-star text-success': productItem.rating < i + 1
@@ -39,7 +36,16 @@
       </ng-container>
       <span class="ms-2">({{ productItem.rating }})</span>
     </div>
-
-    <button class="btn btn-success rounded-5 w-50 p-2">Add to cart</button>
+    <div class="d-flex justify-content-between">
+      <button
+        (click)="showProductDetails(productItem.id)"
+        class="btn btn-success rounded-5 w-50 m-3 p-2"
+      >
+        Details
+      </button>
+      <button (click)="addToCart(productItem.id)" class="btn btn-outline-success rounded-5 w-50 m-3 p-2">
+        Add to cart
+      </button>
+    </div>
   </div>
 </div>

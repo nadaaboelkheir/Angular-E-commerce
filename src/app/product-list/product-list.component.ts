@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductCardComponent } from '../product-card/product-card.component';
-import { products } from '../../assets/products.json';
 import { Product } from '../types/product';
+import { ProductService } from '../requests/product.service';
 
 import { FormsModule } from '@angular/forms';
 @Component({
@@ -13,13 +13,15 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './product-list.component.css',
 })
 export class ProductListComponent {
-  products: Array<Product> = products;
-  filteredProducts: Array<Product> = products;
+  products: Array<Product> = [];
+  filteredProducts: Array<Product> = [];
   searchTerm: string = '';
   searchPerformed: boolean = false;
-
+constructor(private productService: ProductService) {}
   ngOnInit(): void {
-    console.log(this.products);
+   this.productService.getProductList().subscribe((data) => {
+     this.products = data.products
+   })
   }
 
   // Method to handle the search when the search button is clicked
